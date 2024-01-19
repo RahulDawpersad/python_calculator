@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLineEdit, QGridLayout
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt  # Add this line
 
 class Calculator(QWidget):
     def __init__(self):
@@ -16,7 +16,6 @@ class Calculator(QWidget):
         self.display.setFixedHeight(50)
         self.display.setAlignment(Qt.AlignRight)
         self.display.setReadOnly(True)
-        self.display.setStyleSheet('font-size: 18px')
 
         # Create buttons
         buttons = [
@@ -30,7 +29,6 @@ class Calculator(QWidget):
         for i, button_text in enumerate(buttons):
             button = QPushButton(button_text, self)
             button.clicked.connect(lambda _, text=button_text: self.on_click(text))
-            button.setStyleSheet('font-size: 18px; padding: 10px')
             grid_layout.addWidget(button, i // 4, i % 4)
 
         # Create layout
@@ -39,10 +37,6 @@ class Calculator(QWidget):
         layout.addLayout(grid_layout)
 
         self.setLayout(layout)
-
-        # Additional modifications for responsiveness
-        self.setFixedSize(400, 400)
-        self.showMaximized()
 
     def on_click(self, value):
         if value == 'C':
@@ -59,4 +53,5 @@ class Calculator(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     calculator = Calculator()
+    calculator.show()
     sys.exit(app.exec_())
